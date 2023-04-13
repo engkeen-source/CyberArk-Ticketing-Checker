@@ -1,0 +1,10 @@
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\bin\Debug\CyberArk.PasswordVault.PublicInterfaces.dll
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\bin\Debug\RestSharp.dll
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\obj\Debug\JiraValidator.csproj.AssemblyReference.cache
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\obj\Debug\JiraValidator.csproj.CoreCompileInputs.cache
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\obj\Debug\JiraValidator.csproj.CopyComplete
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\bin\Debug\TicketingChecker.dll
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\bin\Debug\TicketingChecker.pdb
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\obj\Debug\TicketingChecker.dll
+C:\Users\tanen\Source\Repos\CyberArk-TicketingPattern-Checker\obj\Debug\TicketingChecker.pdb
