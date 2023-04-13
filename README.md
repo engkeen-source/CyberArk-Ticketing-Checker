@@ -9,7 +9,7 @@
 <img width="689" alt="image" src="https://user-images.githubusercontent.com/71132168/231620765-5416c5af-1105-4db6-a632-c778766a8571.png">
 
 4. Build the solution, dll will be located in the debug folder.
-<img width="689" alt="image" src="https://user-images.githubusercontent.com/71132168/231620876-fccf8045-225f-431f-951d-ee4f8601d758.png">
+<img width="546" alt="image" src="https://user-images.githubusercontent.com/71132168/231620939-43c1f6f0-90e3-40bf-902a-6c165eb03ebc.png">
 
 
 5. Copy this dll to PVWA Bin folder.
