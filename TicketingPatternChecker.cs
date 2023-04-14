@@ -180,7 +180,7 @@ namespace TicketingChecker{
             #region Validate Ticket
 
             #region check ticket is null
-            if (string.IsNullOrEmpty(ticketingID))
+            if (ticketingID.Length < 2 )
             {
                 errorMessage = "Ticket ID is empty, please enter ticket ID.";
                 return false;
