@@ -175,13 +175,21 @@ namespace TicketingChecker{
 				}
 
 			}
-			#endregion
+            #endregion
 
-			#region Validate Ticket
+            #region Validate Ticket
 
-			#region check emergencyMode
-			//if matching bypass code, return true
-			LogWrite("[ Checking TicketID matched BypassID ]");
+            #region check ticket is null
+            if (string.IsNullOrEmpty(ticketingID))
+            {
+                errorMessage = "Ticket ID is empty, please enter ticket ID.";
+                return false;
+            }
+            #endregion
+
+            #region check emergencyMode
+            //if matching bypass code, return true
+            LogWrite("[ Checking TicketID matched BypassID ]");
 			switch (IsValueEmpty(bypassTicketingCheckerCode))
 			{ 
 				case false:
@@ -237,7 +245,7 @@ namespace TicketingChecker{
                     LogWrite("Audit: " + auditMessage);
                     break;
                 case true:
-                    auditMessage += " TicketID validated successfully.";
+                    auditMessage += " TicketID passed pattern checking successfully.";
                     ticketingOutput.TicketId = ticketingID;
                     ticketingOutput.TicketAuditOutput = auditMessage;
                     if (ticketStartTime != DateTime.MinValue && ticketEndTime != DateTime.MinValue)

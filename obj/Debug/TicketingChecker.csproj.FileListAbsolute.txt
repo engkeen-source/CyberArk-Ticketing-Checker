@@ -6,3 +6,11 @@ C:\Users\tanen\source\repos\CyberArk-TicketingPattern-Checker\obj\Debug\Ticketin
 C:\Users\tanen\source\repos\CyberArk-TicketingPattern-Checker\obj\Debug\TicketingChecker.dll
 C:\Users\tanen\source\repos\CyberArk-TicketingPattern-Checker\obj\Debug\TicketingChecker.pdb
 C:\Users\tanen\source\repos\CyberArk-TicketingPattern-Checker\bin\Debug\CyberArk.PasswordVault.PublicInterfaces.dll
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\bin\Debug\TicketingChecker.dll
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\bin\Debug\TicketingChecker.pdb
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\bin\Debug\CyberArk.PasswordVault.PublicInterfaces.dll
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\obj\Debug\TicketingChecker.csproj.AssemblyReference.cache
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\obj\Debug\TicketingChecker.csproj.CoreCompileInputs.cache
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\obj\Debug\TicketingChecker.csproj.CopyComplete
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\obj\Debug\TicketingChecker.dll
+C:\Users\tanen\source\repos\CyberArk-Ticketing-Checker\obj\Debug\TicketingChecker.pdb
