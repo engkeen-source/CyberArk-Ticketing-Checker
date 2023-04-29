@@ -53,8 +53,11 @@ namespace TicketingChecker{
 		//set allowTicketFormatRegex
 		public string allowTicketFormatRegex			= string.Empty;
 
-		//internal paramater
-		public string logMessage						= string.Empty;
+		//set minNumCharForReason
+		public string minCharForReason					= string.Empty;
+
+        //internal paramater
+        public string logMessage						= string.Empty;
 		public string errorMessage						= string.Empty;
 		public string auditMessage						= string.Empty;
 
@@ -179,6 +182,25 @@ namespace TicketingChecker{
 
             #region Validate Ticket
 
+            #region validate length of reason
+            int minNumCharForReason;
+            if (!int.TryParse(minCharForReason, out minNumCharForReason))
+            {
+                errorMessage = "Script Error: Please set minCharForReason in Option.";
+                return false;
+            }
+
+            // Remove any spaces from the cybrReason string
+            string cybrReasonNoSpace = cybrReason.Replace(" ", "");
+
+            // Check if the cybrReason string meets the minimum length requirement
+            if (cybrReasonNoSpace.Length < minNumCharForReason)
+            {
+                errorMessage = string.Format("Reason must be at least {0} characters long.", minNumCharForReason);
+                return false;
+            }
+            #endregion
+
             #region check ticket is null
             if (ticketingID.Length < 2 )
             {
@@ -302,8 +324,11 @@ namespace TicketingChecker{
 			//Allow Ticket Format Regex
 			allowTicketFormatRegex				= ExtractValueFromXML(checkParameters, "allowTicketFormatRegex");
 
-			//Error Message
-			msgInvalidTicketFormat				= ExtractValueFromXML(checkParameters, "msgInvalidTicketFormat");
+			//Minimum umber of character in Provided Reason
+			minCharForReason					= ExtractValueFromXML(checkParameters, "minCharForReason");
+
+            //Error Message
+            msgInvalidTicketFormat				= ExtractValueFromXML(checkParameters, "msgInvalidTicketFormat");
 
             //bypass code
             bypassTicketingCheckerCode			= ExtractValueFromXML(checkParameters, "bypassTicketingCheckerCode").Trim().ToUpper();
