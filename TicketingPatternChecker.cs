@@ -23,7 +23,9 @@ namespace TicketingChecker{
 		public string ticketingID						= string.Empty;
 		public string ticketingSys						= string.Empty;
 		public string ticketingAssignee					= string.Empty;
-		public DateTime ticketStartTime					= new DateTime();
+		public string enableLogging						= string.Empty;		
+
+        public DateTime ticketStartTime					= new DateTime();
 		public DateTime ticketEndTime					= new DateTime();
 
 		//set Info from CyberArk Interface
@@ -347,8 +349,11 @@ namespace TicketingChecker{
             //bypass code
             bypassTicketingCheckerCode			= ExtractValueFromXML(checkParameters, "bypassTicketingCheckerCode").Trim().ToUpper();
 
-			//log
-			logFilePath							= ExtractValueFromXML(checkParameters, "logFilePath");
+			//enable debug log
+			enableLogging						= ExtractValueFromXML(checkParameters, "enableLogging");
+
+            //log
+            logFilePath							= ExtractValueFromXML(checkParameters, "logFilePath");
 		}
 
 		private string ExtractValueFromXML(string checkParameters, string lookupValue){
@@ -402,14 +407,17 @@ namespace TicketingChecker{
 			var strTicketingSys = myTI.ToTitleCase(ticketingSys);
 			var strTime = strToday + " " + "[ " + DateTime.Now.ToString("hh:mm:ss tt - fffff") + " ]";
 
-			var fileName = strTicketingSys + "_" + strUser + "_" + strName + "_" + strToday + ".log";
+			var fileName = strTicketingSys + "_" + strUser + "_" + strToday + ".log";
 			
 			var logFile = Path.Combine(logDirectory, fileName);
 
 			var messageToAppend = strTime + " - " + message + Environment.NewLine;
 
-			//Append Message
-			File.AppendAllText(logFile, messageToAppend);
+			//check if logging is required
+			if (ConvertToBool(enableLogging) == true) {
+                //Append Message
+                File.AppendAllText(logFile, messageToAppend);
+            }
 		}
 
 		#endregion
