@@ -180,7 +180,7 @@ namespace TicketingChecker{
 			}
 			#endregion
 
-			#region Validate Ticket
+			#region Validate ticket
 
 			#region validate length of reason
 			LogWrite("[ Checking Reason is less than x character ]");
@@ -194,12 +194,11 @@ namespace TicketingChecker{
 				{
 					LogWrite($"Error: '{minCharForReason}' is not a valid integer.");
 					LogWrite("Please modify minCharForReason in Option -> Ticketing System");
-					LogWrite("Process ended.");
+					LogWrite("Process ended...");
 					return false;
 				}
 
 				// Remove any spaces from the cybrReason string
-				LogWrite(string.Format("{0}: {1}", "Provided Reason", cybrReason));
 				string cybrReasonNoSpace = cybrReason.Replace(" ", "");
 				LogWrite(string.Format("{0}: {1}", "Provided Reason after move space", cybrReasonNoSpace));
 
@@ -207,9 +206,8 @@ namespace TicketingChecker{
 				LogWrite(string.Format("{0}: {1}", "Length of Provided Reason after move space", cybrReasonNoSpace.Length));
 				if (cybrReasonNoSpace.Length < minNumCharForReason)
 				{
-					errorMessage = string.Format("Reason must be at least {0} characters long.", minNumCharForReason);
-					LogWrite(errorMessage);
-					return false;
+					errorMessage = string.Format("Reason must be at least {0} characters long. Space is not counted. ", minNumCharForReason);
+					bValid = false;
 				}
 
             #endregion
@@ -218,13 +216,11 @@ namespace TicketingChecker{
             LogWrite("[ Checking TicketID is less than 2 character ]");
             if (ticketingID.Length < 2 )
             {
-                LogWrite(string.Format("The length of Ticket ID is {0} characters long.", ticketingID.Length));
                 errorMessage = "Ticket ID is empty, please enter ticket ID.";
-                LogWrite(string.Format("Display message to user - {0}", errorMessage));
-                return false;
+                bValid = false;
             }
             LogWrite(string.Format("The length of Ticket ID is {0} characters long.", ticketingID.Length));
-            LogWrite("Ticket is not NULL, proceed to next check ... ");
+
             #endregion
 
             #region check emergencyMode
