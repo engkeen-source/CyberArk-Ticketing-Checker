@@ -130,9 +130,9 @@ namespace TicketingChecker{
 			LogWrite("[ Fetching XML parameter ]...");
 			LogWrite(string.Format("{0}: {1}", "msgInvalidTicketFormat"				, msgInvalidTicketFormat));
 			LogWrite(string.Format("{0}: {1}", "bypassTicketingCheckerCode"			, bypassTicketingCheckerCode));
+            LogWrite(string.Format("{0}: {1}", "minCharForReason"					, minCharForReason));
 
-			
-			LogWrite("[ Fetching Ticketing connection account -> Additional Properties ]");
+            LogWrite("[ Fetching Ticketing connection account -> Additional Properties ]");
 			foreach (var item in parameters.TicketingConnectionAccount.Properties)
 			{
 				if (item.Key == "LastFailDate" || item.Key == "LastSuccessChange" || item.Key == "LastSuccessReconciliation")
@@ -178,35 +178,53 @@ namespace TicketingChecker{
 				}
 
 			}
-            #endregion
+			#endregion
 
-            #region Validate Ticket
+			#region Validate Ticket
 
-            #region validate length of reason
-            int minNumCharForReason;
-            if (!int.TryParse(minCharForReason, out minNumCharForReason))
-            {
-                errorMessage = "Script Error: Please set minCharForReason in Option.";
-                return false;
-            }
+			#region validate length of reason
+			LogWrite("[ Checking Reason is less than x character ]");
+				// Convert string to int
+				int minNumCharForReason = 0;
+				try
+				{
+					minNumCharForReason = int.Parse(minCharForReason);
+				}
+				catch (FormatException)
+				{
+					LogWrite($"Error: '{minCharForReason}' is not a valid integer.");
+					LogWrite("Please modify minCharForReason in Option -> Ticketing System");
+					LogWrite("Process ended.");
+					return false;
+				}
 
-            // Remove any spaces from the cybrReason string
-            string cybrReasonNoSpace = cybrReason.Replace(" ", "");
+				// Remove any spaces from the cybrReason string
+				LogWrite(string.Format("{0}: {1}", "Provided Reason", cybrReason));
+				string cybrReasonNoSpace = cybrReason.Replace(" ", "");
+				LogWrite(string.Format("{0}: {1}", "Provided Reason after move space", cybrReasonNoSpace));
 
-            // Check if the cybrReason string meets the minimum length requirement
-            if (cybrReasonNoSpace.Length < minNumCharForReason)
-            {
-                errorMessage = string.Format("Reason must be at least {0} characters long.", minNumCharForReason);
-                return false;
-            }
+				// Check if the cybrReason string meets the minimum length requirement
+				LogWrite(string.Format("{0}: {1}", "Length of Provided Reason after move space", cybrReasonNoSpace.Length));
+				if (cybrReasonNoSpace.Length < minNumCharForReason)
+				{
+					errorMessage = string.Format("Reason must be at least {0} characters long.", minNumCharForReason);
+					LogWrite(errorMessage);
+					return false;
+				}
+
             #endregion
 
             #region check ticket is null
+            LogWrite("[ Checking TicketID is less than 2 character ]");
             if (ticketingID.Length < 2 )
             {
+                LogWrite(string.Format("The length of Ticket ID is {0} characters long.", ticketingID.Length));
                 errorMessage = "Ticket ID is empty, please enter ticket ID.";
+                LogWrite(string.Format("Display message to user - {0}", errorMessage));
                 return false;
             }
+            LogWrite(string.Format("The length of Ticket ID is {0} characters long.", ticketingID.Length));
+            LogWrite("Ticket is not NULL, proceed to next check ... ");
             #endregion
 
             #region check emergencyMode
