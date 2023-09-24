@@ -45,9 +45,10 @@ namespace TicketingChecker{
 		public string cybrHostname						= string.Empty;
 		public string cybrDatabase						= string.Empty;
 		public string cybrPort							= string.Empty;
+        public string cybrAccessby						= string.Empty;
 
-		//set error messages
-		public string msgInvalidTicketFormat			= string.Empty;
+        //set error messages
+        public string msgInvalidTicketFormat			= string.Empty;
 
 		//set bypass checker code
 		public string bypassTicketingCheckerCode		= string.Empty;
@@ -113,9 +114,13 @@ namespace TicketingChecker{
 			{
 				cybrPort	= parameters.AdditionalProperties["Port"];
 			}
-			
-			//set ticketing parameter
-			ticketingSys		= parameters.SystemName.ToUpper();
+            if (parameters.AdditionalProperties.ContainsKey("Access_By"))
+            {
+                cybrAccessby = parameters.AdditionalProperties["Access_By"];
+            }
+
+            //set ticketing parameter
+            ticketingSys		= parameters.SystemName.ToUpper();
 			ticketingID			= parameters.TicketId.Trim().ToUpper();
 
 			//Audit
@@ -235,6 +240,13 @@ namespace TicketingChecker{
 					auditMessage += " Emergency=" + emergencyMode + " | ";
 					if (emergencyMode == true)
 					{
+						// if object used by vendor, it cannot be activate emergency mode
+						if (cybrAccessby.ToLower() == "vendor")
+						{
+                            errorMessage = string.Format("Vendor is not allowed to bypass approval workflow.");
+                            return false;
+                        }
+
 						auditMessage += "Ticket pattern pass checker successfully.";
 						ticketingOutput.TicketAuditOutput = string.Format("{0},{1}", ticketingID, auditMessage);
 						LogWrite(ticketingOutput.TicketAuditOutput);
